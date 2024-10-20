@@ -72,7 +72,7 @@ title.get("/:id", async (c) => {
 
     response.year = response.releaseDetailed.year;
    //originalTitle
-    response.originalTitle = response.originalTitleText.text;
+    response.originalTitle = moreDetails.originalTitleText.text;
     response.spokenLanguages = moreDetails.spokenLanguages;
     response.filmingLocations = moreDetails.filmingLocations;
     response.runtime = moreDetails.runtime;
