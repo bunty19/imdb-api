@@ -44,19 +44,15 @@ title.get("/:id", async (c) => {
     const title = titleNode ? titleNode.textContent.trim() : '';
     response.title =title;
 
-    let nextDiv = titleNode.nextSibling;
-
-// Loop to find the next <div> element (skipping non-element nodes)
-    let originalTitle = '';
-    while (nextDiv) {
-        if (nextDiv.nodeType === 1 && nextDiv.tagName.toLowerCase() === 'div') {
-            // Found the next <div>, extract the title
-            originalTitle = nextDiv.textContent.replace('Original title: ', '').trim();
-            break; // Exit the loop once found
-        }
-        nextDiv = nextDiv.nextSibling;
+    const originalTitleDiv = titleNode ? titleNode.nextElementSibling : null;
+    
+    // Extract the original title text
+    if (originalTitleDiv) {
+        const originalTitle = originalTitleDiv.textContent.replace('Original title: ', '').trim();
+        response.originalTitle = originalTitle;
+    } else {
+        response.originalTitle = ''; // Handle the case where the original title is not found
     }
-   response.originalTitle =originalTitle;
     // image
     response.image = schema.image;
     response.images = moreDetails.images;
