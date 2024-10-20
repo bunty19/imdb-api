@@ -38,10 +38,17 @@ title.get("/:id", async (c) => {
     response.productionStatus = moreDetails.productionStatus;
 
     // title
-    // response.title = getNode(dom, "h1", "hero-title-block__title").innerHTML;
-    response.title = entityDecoder(schema.name, { level: "html5" });
+   const titleNode = getNode(dom, "h1", "hero__pageTitle");
+  const title = titleNode ? titleNode.querySelector('.hero__primary-text').textContent.trim() : '';
+
+  // Extracting the original title from the adjacent div
+  const originalTitleNode = titleNode ? titleNode.nextElementSibling : null;
+  const originalTitle = originalTitleNode ? originalTitleNode.textContent.replace("Original title: ", "").trim() : '';
+    //response.title = entityDecoder(schema.name, { level: "html5" });
 
     // image
+     response.title = title;
+    response.originalTitle = originalTitle;
     response.image = schema.image;
     response.images = moreDetails.images;
 
