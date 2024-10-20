@@ -44,7 +44,7 @@ title.get("/:id", async (c) => {
     const title = titleNode ? titleNode.textContent.trim() : '';
     response.title =title;
 
-    const nextDiv = titleNode.nextSibling;
+    let nextDiv = titleNode.nextSibling;
 
 // Loop to find the next <div> element (skipping non-element nodes)
     let originalTitle = '';
